@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "pyqt"
+version = "0.1.0"
+description = "Unified Versionless Python PyQt Module."
+authors = ["hoefkensj <hoefkens.j@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
