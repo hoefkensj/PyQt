@@ -9,50 +9,56 @@
 # ##############################################################################
 #
 
-
-from pathlib import Path
+from pathlib import Path,os
 from inspect import getmodulename
 from importlib import import_module
 from pkgutil import iter_modules
 
+def OSParameters(OS):
+	P={}
+	P['posix']={}
+	P['posix']['dirs']= ['usr',]
+	P['posix']['arch']= ['','32','64']
+	P['posix']['path']= ['/{DIR}/lib{ARCH}/']
 
-def detectQt():
-	class linux:
-		def __init__(slf):
-			slf.dirs = ["usr"]
-			slf.libs = ["lib", "lib32", "lib64"]
-			# breakpoint()
-			slf.dQt()
-			# breakpoint()
-			slf.dPyQt()
-
-		def dQt(
-			slf,
-		):
-			slf.Qt = []
-			for folder in slf.dirs:
-				for lib in slf.libs:
-					for qt in Path(f"/{folder}/{lib}").glob("qt[0-9]*"):
-						if qt.name.__str__()[2:].isnumeric():
-							slf.Qt += [qt.name.__str__()[2:]]
-
-		def dPyQt(slf):
-			slf.PyQt = []
-			for version in slf.Qt:
-				for module in iter_modules():
-					if module.name.casefold().startswith("pyqt"):
-						candidate = module.name.removeprefix("PyQt")
-						if candidate.isnumeric():
-							slf.PyQt += [int(candidate)]
-
-	return linux()
+	if P.get(OS):
+		for dir in	P[OS]['dirs']:
+			for arch in 	P[OS]['arch']:
+				P[OS]['path']+=[
+					P[OS]['path'][0].format(DIR=dir,ARCH=arch)
+				]
+	return P.get(OS)
 
 
-def importQt(version=None, modules=None):
-	latest = detectQt().PyQt[-1]
-	version = version or latest
-	PyQt = import_module(f"PyQt{version}")
-	return PyQt
+def detectQt(P):
+	def dQt():
+		nonlocal d
+		for path in P.get('path')[1:]:
+			for qt in Path(path).glob("qt[0-9]*"):
+				if qt.name.__str__()[2:].isnumeric():
+					d['Qt'] += [qt.name.__str__()[2:]]
+
+	def dPyQt():
+		nonlocal d
+		for module in iter_modules():
+			if module.name.casefold().startswith("pyqt"):
+					candidate = module.name.removeprefix("PyQt")
+					if candidate.isnumeric():
+							d['PyQt'] += [int(candidate)]
+
+	d={'Qt': [], 'PyQt': [] }
+	dQt()
+	dPyQt()
+	return d
+
+def ImportPyQt(versions):
+	vPyQt=versions['PyQt']
+	def importPyQt(version=None, modules=None):
+		latest = vPyQt[-1]
+		version = version if version in vPyQt else latest
+		PyQt = import_module(f"PyQt{version}")
+		return PyQt
+	return importPyQt
 
 
 def importPyQtModules(PyQt):
@@ -62,6 +68,9 @@ def importPyQtModules(PyQt):
 			PyQt.__setattr__(name, import_module(f"{PyQt.__name__}.{name}"))
 	return PyQt
 
-
-PyQt = importQt()
+OS=os.name
+OSParams=OSParameters(OS)
+Versions=detectQt(OSParams)
+ImportPyQt=ImportPyQt(Versions)
+PyQt = ImportPyQt()
 PyQt = importPyQtModules(PyQt)
