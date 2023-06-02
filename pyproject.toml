@@ -1,3 +1,22 @@
+[project]
+name = "PyQt"
+version = "0.2.0"
+authors = [
+  { name="Hoefkens Jeroen", email="hoefkens.j@gmail.com" },
+]
+description = "Unified Versionless Python PyQt Module."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/hoefkensj/PyQt"
+"Bug Tracker" = "https://github.com/hoefkensj/PyQt/issues"
+
 [tool.poetry]
 name = "pyqt"
 version = "0.2.0"
