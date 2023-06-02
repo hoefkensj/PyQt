@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyqt"
-version = "0.1.0"
+version = "0.2.0"
 description = "Unified Versionless Python PyQt Module."
 authors = ["hoefkensj <hoefkens.j@gmail.com>"]
 license = "MIT"

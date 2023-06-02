@@ -1,3 +1,20 @@
+# Editors
+.vscode/
+.idea/
+.settings
+.pydevproject
+.project
+
+# Mac/OSX
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Linux
+nohup.out
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

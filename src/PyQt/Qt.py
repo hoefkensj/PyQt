@@ -4,13 +4,12 @@
 # # FILE: Qt.py                                                                #
 # # REPO: hoefkensj/PyQt.git                                                   #
 # # HOST: github.com                                                           #
-# # VERSION: 0.1.2                                                             #
-# # UPDATED:  20230512                                                         #
+# # VERSION: 0.2.0                                                             #
+# # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
-import re
-from os import name
-from re import compile,match
+from sys import modules
+from re import compile
 from pathlib import Path
 from inspect import getmodulename
 from importlib import import_module
@@ -34,31 +33,29 @@ def detect(**versions):
 	return versions
 
 def ImportMod(*version,mod='PyQt'):
-	global Versions
-	if not version:
-		if not Versions.get(mod):
-			result=None
-		else:
-			result=import_module(f"{mod}{Versions.get(mod)[-1]}")
-	else:
-		if not Versions.get(mod) or version not in Versions.get(mod) :
-			result=None
-		else :
-			result=import_module(f"{mod}{version}")
-	return result
+	module=None
+	Versions=detect()
+	v=Versions.get(mod)
+	if version:
+		v=version
+	if v is not None:
+		version=v[-1]
+		if version in Versions[mod]:
+			module=import_module(f"{mod}{version}")
+			modules[mod]=module
+	return module
 
-
-
-def importSubMod(mod):
+def importSubMod(module,mod='PyQt'):
 	for filename in Path(PyQt.__file__).parent.glob(f"Qt*.*"):
 		name = getmodulename(filename.name)
 		if name:
-			PyQt.__setattr__(name, import_module(f"{PyQt.__name__}.{name}"))
-	return PyQt
+			submod=import_module(f"{PyQt.__name__}.{name}")
+			module.__setattr__(name, submod)
+			modules[name]=submod
+	return module
 
 Versions=detect()
 PyQt=ImportMod(mod='PyQt')
 PyQt = importSubMod(PyQt)
-for attr in  dir(PyQt):
-	if not attr.startswith('__'):
-		print(attr,getattr(PyQt,attr) )
+
+

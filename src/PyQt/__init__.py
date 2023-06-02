@@ -4,8 +4,9 @@
 # # FILE: __init__.py                                                          #
 # # REPO: hoefkensj/PyQt.git                                                   #
 # # HOST: github.com                                                           #
-# # VERSION: 0.1.2                                                             #
-# # UPDATED:  20230512                                                         #
+# # VERSION: 0.2.0                                                             #
+# # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
-from PyQt.Qt import PyQt
+from PyQt.Qt import *
+

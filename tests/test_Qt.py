@@ -4,13 +4,12 @@
 # # FILE: test_Qt.py                                                           #
 # # REPO: hoefkensj/PyQt.git                                                   #
 # # HOST: github.com                                                           #
-# # VERSION: 0.1.2                                                             #
-# # UPDATED:  20230512                                                         #
+# # VERSION: 0.2.0                                                             #
+# # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
 import unittest
 from src import PyQt
-
 
 class Tests(unittest.TestCase):
 	def test_PyQt(self):
