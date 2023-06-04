@@ -8,5 +8,14 @@
 # # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
-from PyQt.Qt import *
+from sys import modules
+from PyQt.main import ImportMod,importSubMod
+
+modules['PyQt']=ImportMod()
+for module in (mods:=importSubMod()):
+	setattr(modules['PyQt'],module,mods[module])
+
+# # globals()['PyQt']=PyQt
+# for k in globals()['PyQt']:
+# 	print(k)
 

@@ -11,6 +11,10 @@
 from sys import argv, exit
 from PyQt import QtWidgets
 
+# OR :
+#	 import PyQt
+#	 QtWidgets = PyQt.QtWidgets
+
 QtApp   = QtWidgets.QApplication(argv)
 wgt     = QtWidgets.QWidget()
 lbl     = QtWidgets.QLabel()
