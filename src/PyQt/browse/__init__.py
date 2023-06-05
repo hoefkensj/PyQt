@@ -8,9 +8,3 @@
 # # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
-from sys import modules
-from PyQt.main import ImportMod
-
-modules['PyQt']= modules[ImportMod().__name__]
-
-

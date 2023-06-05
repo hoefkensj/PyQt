@@ -8,7 +8,7 @@
 # # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
-from sys import modules
+
 from re import compile
 from pathlib import Path
 from inspect import getmodulename
@@ -35,17 +35,20 @@ def detect(*modules):
 	return vers
 
 def ImportMod(*version,mod='PyQt'):
-	module=None
-	V = detect()
+	V=detect()
+	if not version:
+		version=V[-1]
+	else:
+		version=max([i for i in version if i in V ])
 	v = V.get(mod)
 	if version:
 		v=version
 	if v is not None:
 		v=v[-1]
 		if v in V.get(mod):
-			mod_loaded=import_module(f"{mod}{v}")
+			module=import_module(f"{mod}{v}")
 			# modules[mod]=mod_loaded
-			module=mod_loaded
+
 	return module
 
 def importSubMod(*module,**mods):
@@ -56,8 +59,7 @@ def importSubMod(*module,**mods):
 	for fname in Path(module.__file__).parent.glob(f"Qt*.*"):
 		if (name:= getmodulename(fname.name)):
 			mods[name] = import_module(f"{module.__name__}.{name}")
-			# module.__setattr__(name, submod)
-			# globals()[mod][name]=submod.__dict__
+			print(name)
 	return mods
 
 #Versions=detect()
