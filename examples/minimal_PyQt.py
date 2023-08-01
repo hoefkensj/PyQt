@@ -9,18 +9,18 @@
 # ##############################################################################
 #
 from sys import argv, exit
+import PyQt
 from PyQt import QtWidgets
-
-# OR :
-#	 import PyQt
-#	 QtWidgets = PyQt.QtWidgets
-
 QtApp   = QtWidgets.QApplication(argv)
 wgt     = QtWidgets.QWidget()
-lbl     = QtWidgets.QLabel()
 layout  = QtWidgets.QVBoxLayout(wgt)
-layout  = layout.addWidget(lbl)
-#only here  to get name of the parentin the  line that follows
-import PyQt ; lbl = lbl.setText(f'Using: {PyQt.__name__}')
+
+lbl     = QtWidgets.QLabel()
+lbl.setText(f'Qt version: {PyQt.__name__}')
+btn			=	QtWidgets.QPushButton()
+btn.setText('Quit')
+btn.clicked.connect(exit)
+layout.addWidget(lbl)
+layout.addWidget(btn)
 wgt.show()
 QtApp.exec()

@@ -17,53 +17,35 @@ from pkgutil import iter_modules
 
 # Regex Masks:
 MASK_modv=r'(?P<MOD>{MOD})(?P<V>\d+)'
+REX=compile(MASK_modv.format(MOD='PyQt'))
 
-def detect(*modules):
-	#weird construction due to see ->                                             #TODO future: PySide?
-	if not modules:
-		modules=['PyQt',]
-	REX=compile(MASK_modv.format(MOD=modules[0]))
-	vers={mod : [] for mod in modules}
-
+def detect_PyQt():
+	v=[]
 	for i in [*iter_modules()]:
 		if ( QT := REX.match(i.name) ) :
 			groups = QT.groupdict()
-			mod    = groups.get('MOD')
-			v      = groups.get('V')
-			vers[mod] += [v]
+			v      += groups.get('V')
+	return v
 
-	return vers
-
-def ImportMod(*version,mod='PyQt'):
-	V=detect()
-	if not version:
-		version=V[-1]
-	else:
-		version=max([i for i in version if i in V ])
-	v = V.get(mod)
-	if version:
-		v=version
+def ImportPyQt(*v):
+	v = list(v) or detect_PyQt()
 	if v is not None:
 		v=v[-1]
-		if v in V.get(mod):
-			module=import_module(f"{mod}{v}")
-			# modules[mod]=mod_loaded
+	def load():
+		return import_module(f"PyQt{v}")
+	return f"PyQt{v}",load
 
-	return module
+def importSubMod(**mods):
+	modname,load=ImportPyQt()
+	# for fname in Path(module.__file__).parent.glob(f"Qt*.*"):
+	for qt in [*iter_modules()]:
+		if qt.name.startswith('Qt'):
+			if (name:= getmodulename(qt.name)):
+				mods[name] = import_module(f"{modname}.{name}")
+				print(name)
 
-def importSubMod(*module,**mods):
-	if not module:
-		module=[ImportMod(),]
-	if module:
-		module=module[0]
-	for fname in Path(module.__file__).parent.glob(f"Qt*.*"):
-		if (name:= getmodulename(fname.name)):
-			mods[name] = import_module(f"{module.__name__}.{name}")
-			print(name)
 	return mods
 
 #Versions=detect()
-PyQt=ImportMod(mod='PyQt')
-Mods= importSubMod(PyQt)
-
-
+PyQt= ImportPyQt()
+Mods= importSubMod()

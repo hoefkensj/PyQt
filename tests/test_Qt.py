@@ -9,12 +9,14 @@
 # ##############################################################################
 #
 import unittest
+from QDPrintTree import stdOut
 from src import PyQt
 
 class Tests(unittest.TestCase):
 	def test_PyQt(self):
 		Pyqt_Core=PyQt.PyQt.QtCore
 		self.assertIsNotNone(PyQt.PyQt.QtCore)
+		stdOut(PyQt=PyQt)
 		return self
 
 

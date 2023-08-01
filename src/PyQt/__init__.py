@@ -8,9 +8,10 @@
 # # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
+
 from sys import modules
-from PyQt.main import ImportMod
+from PyQt.main import ImportPyQt
+from PyQt.lib import *
+Name,Mod=ImportPyQt()
 
-modules['PyQt']= modules[ImportMod().__name__]
-
-
+modules['PyQt']=Mod() #modules[Name]

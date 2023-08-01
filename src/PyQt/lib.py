@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # ##############################################################################
 # # PROJ: PyQt                           AUTHORS:         Hoefkens.j@gmail.com #
-# # FILE: 5.py                                                          #
+# # FILE: lib.py                                                          #
 # # REPO: hoefkensj/PyQt.git                                                   #
 # # HOST: github.com                                                           #
 # # VERSION: 0.2.0                                                             #
 # # UPDATED:  20230602                                                         #
 # ##############################################################################
 #
+import PyQt
 
-
+def Version():return PyQt.__name__
 def Qt():...
 def QtBluetooth():...
 def QtCore():...
@@ -42,7 +43,3 @@ def QtWidgets():...
 def QtX11Extras():...
 def QtXml():...
 def QtXmlPatterns():...
-
-
-
-
