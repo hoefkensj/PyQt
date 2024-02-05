@@ -9,7 +9,8 @@
 # ##############################################################################
 #
 import unittest
-from QDPrintTree import stdOut
+from QDPrintTree import main
+
 from src import PyQt
 
 class Tests(unittest.TestCase):

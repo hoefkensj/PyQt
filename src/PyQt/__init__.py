@@ -12,6 +12,6 @@
 from sys import modules
 from PyQt.main import ImportPyQt
 from PyQt.lib import *
-Name,Mod=ImportPyQt()
+module=ImportPyQt()
 
-modules['PyQt']=Mod() #modules[Name]
+modules['PyQt']=module #modules[Name]

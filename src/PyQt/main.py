@@ -32,20 +32,18 @@ def ImportPyQt(*v):
 	if v is not None:
 		v=v[-1]
 	def load():
-		return import_module(f"PyQt{v}")
-	return f"PyQt{v}",load
+		module=import_module(f"PyQt{v}")
+		module.__setattr__('version',v)
+		return module
+	return load()
 
 def importSubMod(**mods):
-	modname,load=ImportPyQt()
-	# for fname in Path(module.__file__).parent.glob(f"Qt*.*"):
 	for qt in [*iter_modules()]:
 		if qt.name.startswith('Qt'):
 			if (name:= getmodulename(qt.name)):
-				mods[name] = import_module(f"{modname}.{name}")
-				print(name)
-
+				PyQt.__setattr__(name,import_module(f"PyQt{PyQt.version}.{name}"))
 	return mods
-
+	
 #Versions=detect()
 PyQt= ImportPyQt()
 Mods= importSubMod()

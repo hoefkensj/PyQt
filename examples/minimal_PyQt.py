@@ -11,6 +11,7 @@
 from sys import argv, exit
 import PyQt
 from PyQt import QtWidgets
+
 QtApp   = QtWidgets.QApplication(argv)
 wgt     = QtWidgets.QWidget()
 layout  = QtWidgets.QVBoxLayout(wgt)
@@ -18,6 +19,7 @@ layout  = QtWidgets.QVBoxLayout(wgt)
 lbl     = QtWidgets.QLabel()
 lbl.setText(f'Qt version: {PyQt.__name__}')
 btn			=	QtWidgets.QPushButton()
+
 btn.setText('Quit')
 btn.clicked.connect(exit)
 layout.addWidget(lbl)
