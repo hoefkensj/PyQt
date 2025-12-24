@@ -1,0 +1,108 @@
+#!/usr/bin/env python
+# ##############################################################################
+# # PROJ: PyQt                           AUTHORS:         Hoefkens.j@gmail.com #
+# # FILE: lib.py                                                          #
+# # REPO: hoefkensj/PyQt.git                                                   #
+# # HOST: github.com                                                           #
+# # VERSION: 0.2.0                                                             #
+# # UPDATED:  20230602                                                         #
+# ##############################################################################
+#
+
+def Version(): return PyQt.__name__
+
+	
+def Qt(): ...
+
+	
+def QtBluetooth(): ...
+
+	
+def QtCore(): ...
+
+	
+def QtDBus(): ...
+
+	
+def QtDesigner(): ...
+
+	
+def QtGui(): ...
+
+	
+def QtHelp(): ...
+
+	
+def QtLocation(): ...
+
+	
+def QtMultimedia(): ...
+
+	
+def QtMultimediaWidgets(): ...
+
+	
+def QtNetwork(): ...
+
+	
+def QtNfc(): ...
+
+	
+def QtOpenGL(): ...
+
+	
+def QtPositioning(): ...
+
+	
+def QtPrintSupport(): ...
+
+	
+def QtQml(): ...
+
+	
+def QtQuick(): ...
+
+	
+def QtQuick3D(): ...
+
+	
+def QtQuickWidgets(): ...
+
+	
+def QtRemoteObjects(): ...
+
+	
+def QtSensors(): ...
+
+	
+def QtSerialPort(): ...
+
+	
+def QtSql(): ...
+
+	
+def QtSvg(): ...
+
+	
+def QtTest(): ...
+
+	
+def QtTextToSpeech(): ...
+
+	
+def QtWebChannel(): ...
+
+	
+def QtWebSockets(): ...
+
+	
+def QtWidgets(): ...
+
+	
+def QtX11Extras(): ...
+
+	
+def QtXml(): ...
+
+	
+def QtXmlPatterns(): ...

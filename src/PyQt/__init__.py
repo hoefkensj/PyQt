@@ -9,9 +9,10 @@
 # ##############################################################################
 #
 
+from PyQt.QtLib.PyQt import *
 from sys import modules
 from PyQt.main import ImportPyQt
-from PyQt.lib import *
-module=ImportPyQt()
+# QtWidgets=lib.PyQt
+modules['PyQt']=ImportPyQt()
 
-modules['PyQt']=module #modules[Name]
+

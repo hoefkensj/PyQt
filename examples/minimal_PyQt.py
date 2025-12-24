@@ -10,7 +10,7 @@
 #
 from sys import argv, exit
 import PyQt
-from PyQt import QtWidgets
+from PyQt6 import QtWidgets
 
 QtApp   = QtWidgets.QApplication(argv)
 wgt     = QtWidgets.QWidget()
